@@ -1,18 +1,7 @@
 import sys
 
-from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import (
-    QApplication,
-    QComboBox,
-    QDoubleSpinBox,
-    QLabel,
-    QLineEdit,
-    QMainWindow,
-    QPushButton,
-    QSpinBox,
-    QVBoxLayout,
-    QWidget,
-)
+from PyQt6.QtCore import QSize, Qt
+from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton
 
 
 # Subclass QMainWindow to customize your application's main window
@@ -20,30 +9,15 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.setWindowTitle("Widgets App")
+        self.setWindowTitle("My App")
+        button = QPushButton("Press Me!")
 
-        layout = QVBoxLayout()
-        widgets = [
-            QComboBox,
-            QDoubleSpinBox,
-            QLabel,
-            QLineEdit,
-            QPushButton,
-            QSpinBox,
-        ]
-
-        for w in widgets:
-            layout.addWidget(w())
-
-        widget = QWidget()
-        widget.setLayout(layout)
-
-        # Set the central widget of the Window. Widget will expand
-        # to take up all the space in the window by default.
-        self.setCentralWidget(widget)
+        # Set the central widget of the Window.
+        self.setCentralWidget(button)
 
 
 app = QApplication(sys.argv)
+
 window = MainWindow()
 window.show()
 
