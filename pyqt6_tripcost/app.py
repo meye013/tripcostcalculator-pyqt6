@@ -41,7 +41,7 @@ class MainWindow(QMainWindow):
 
         #spinbox suffixes
 
-        self.gasprice_input.setSuffix(" gal")
+        self.gasprice_input.setSuffix(" $ per gal")
         self.tripdistance_input.setSuffix(" mi")
         self.fuelefficiency_input.setSuffix(" mpgs")
 
