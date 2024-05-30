@@ -14,9 +14,6 @@ class MainWindow(QMainWindow):
 
     def __init__(self):
         super().__init__()
-            
-        
-
 
         self.setWindowTitle("pyqt6 tripcost")
         self.setContentsMargins(12,12,12,12)
@@ -59,6 +56,7 @@ class MainWindow(QMainWindow):
         self.fuelefficiency_input.setSuffix(" mpgs")
 
         #pushbuttons
+        
         self.calculate_button = QPushButton("Calculate")
         self.main_layout.addWidget(self.calculate_button, 5, 0)
         self.calculate_button.pressed.connect(self.calculate)
@@ -87,10 +85,6 @@ class MainWindow(QMainWindow):
         font = self.gallons_needed.font()
         font.setPointSize(15)
         self.gallons_needed.setFont(font)
-
-    
-
-        
 
 
 app = QApplication(sys.argv)
