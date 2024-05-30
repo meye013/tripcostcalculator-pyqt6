@@ -5,11 +5,20 @@ from PyQt6.QtWidgets import (QApplication, QMainWindow, QPushButton, QDoubleSpin
 
 # Subclass QMainWindow to customize your application's main window
 class MainWindow(QMainWindow):
+        
+    #functions
+    def calculate(self):
+            self.tripdistance_input/self.fuelefficiency_input == self.gallons_needed
+
+            self.gallons_needed*self.gasprice_input == self.tripcost_output
 
     def __init__(self):
         super().__init__()
+            
         
-        self.setWindowTitle("My App")
+
+
+        self.setWindowTitle("pyqt6 tripcost")
         self.setContentsMargins(12,12,12,12)
         self.resize(200,350)
         
@@ -43,12 +52,43 @@ class MainWindow(QMainWindow):
         self.tripdistance_input.setPrefix("Trip Distance = ")
         self.fuelefficiency_input.setPrefix("Fuel efficiency = ")
 
-        #Pushbuttons
+        #spinbox suffixes
+
+        self.gasprice_input.setSuffix(" $ per gal")
+        self.tripdistance_input.setSuffix(" mi")
+        self.fuelefficiency_input.setSuffix(" mpgs")
+
+        #pushbuttons
         self.calculate_button = QPushButton("Calculate")
         self.main_layout.addWidget(self.calculate_button, 5, 0)
+        self.calculate_button.pressed.connect(self.calculate)
         
         self.reset_button = QPushButton("Reset")
         self.main_layout.addWidget(self.reset_button, 6, 0)
+
+        #outputs
+
+        self.tripcost_output = QLabel("tripcostlabel")
+        self.main_layout.addWidget(self.tripcost_output, 8, 0)
+        
+        self.gallons_needed = QLabel("gallonlabel")
+        self.main_layout.addWidget(self.gallons_needed, 9, 0)
+
+        #fonts
+
+        font = self.title.font()
+        font.setPointSize(20)
+        self.title.setFont(font)
+
+        font = self.tripcost_output.font()
+        font.setPointSize(15)
+        self.tripcost_output.setFont(font)
+
+        font = self.gallons_needed.font()
+        font.setPointSize(15)
+        self.gallons_needed.setFont(font)
+
+    
 
         
 
