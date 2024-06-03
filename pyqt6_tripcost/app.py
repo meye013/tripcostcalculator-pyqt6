@@ -5,12 +5,27 @@ from PyQt6.QtWidgets import (QApplication, QMainWindow, QPushButton, QDoubleSpin
 
 # Subclass QMainWindow to customize your application's main window
 class MainWindow(QMainWindow):
-        
+            
     #functions
-    def calculate(self):
-            self.tripdistance_input/self.fuelefficiency_input == self.gallons_needed
+    def reset(self):
+        self.title.setText("Trip Cost Calculator")
 
-            self.gallons_needed*self.gasprice_input == self.tripcost_output
+        self.tripcost_output.setText("Tripcost: $ ")
+
+        self.gallons_needed.setText("Gallons Needed: ")
+    def calculate(self):
+        if self.fuelefficiency_input.value() == 0.00:
+                self.tripcost_output.setText("Tripcost: $Error")
+
+                self.gallons_needed.setText("Gallons Needed: Error")
+        if self.fuelefficiency_input.value() > 0.00:
+                gallons_needed =  self.tripdistance_input.value()/self.fuelefficiency_input.value()
+
+                tripcost = gallons_needed*self.gasprice_input.value()
+
+                self.tripcost_output.setText("Tripcost: " + "$" + str(tripcost))
+
+                self.gallons_needed.setText("Gallons Needed: " + str(gallons_needed))
 
     def __init__(self):
         super().__init__()
@@ -45,13 +60,13 @@ class MainWindow(QMainWindow):
 
         #Spinbox Prefixes
 
-        self.gasprice_input.setPrefix("Gas Price = ")
+        self.gasprice_input.setPrefix("Gas Price = $ ")
         self.tripdistance_input.setPrefix("Trip Distance = ")
         self.fuelefficiency_input.setPrefix("Fuel efficiency = ")
 
         #spinbox suffixes
 
-        self.gasprice_input.setSuffix(" $ per gal")
+        self.gasprice_input.setSuffix(" per gal")
         self.tripdistance_input.setSuffix(" mi")
         self.fuelefficiency_input.setSuffix(" mpgs")
 
@@ -63,13 +78,14 @@ class MainWindow(QMainWindow):
         
         self.reset_button = QPushButton("Reset")
         self.main_layout.addWidget(self.reset_button, 6, 0)
+        self.reset_button.pressed.connect(self.reset)
 
         #outputs
 
-        self.tripcost_output = QLabel("tripcostlabel")
+        self.tripcost_output = QLabel("Tripcost: $")
         self.main_layout.addWidget(self.tripcost_output, 8, 0)
         
-        self.gallons_needed = QLabel("gallonlabel")
+        self.gallons_needed = QLabel("Gallons Needed: ")
         self.main_layout.addWidget(self.gallons_needed, 9, 0)
 
         #fonts
